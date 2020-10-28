@@ -1,6 +1,6 @@
 #include "Problem.h"
 
-Problem::Problem(filePath) {
+Problem::Problem(string &filePath) {
     ifstream fe;
     string line;
 
@@ -12,9 +12,6 @@ Problem::Problem(filePath) {
             stringstream ss;
             ss << line;
             cout << line << endl;
-//            getline(ss, dni, ';');
-//            dlat = stold(latitud);
-//            dlon = stold(longitud);
         }
         cout << "File charged successfully." << endl;
         fe.close();
