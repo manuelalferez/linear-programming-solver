@@ -4,8 +4,6 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <fstream>
-#include <sstream>
 
 using namespace std;
 
@@ -14,7 +12,7 @@ public:
     Problem(string &filePath);
 
 private:
-    vector <vector<float>> matrix;
+    vector<vector<float>> matrix;
     vector<float> solution;
 };
 

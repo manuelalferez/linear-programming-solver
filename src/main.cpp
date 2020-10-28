@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "Problem.h"
+#include "Loader.h"
 
 int main() {
     string dataPath = "../data/data.txt";
     std::cout << "Hello Linear Programming Solver!" << std::endl;
-    Problem problem(dataPath);
+    Loader loader(dataPath);
     return 0;
 }

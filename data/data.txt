@@ -1,8 +1,11 @@
-1
+Objective Function
+Z;X1;X2
 1;50;80
-2
+Number of Structural Conditions;2
+X1;X2;OPERATOR;b
 1;2;<=;120
 1;1;<=;90
-2
+Number of Nonnegativity Conditions;2
+X1;X2;OPERATOR;b
 1;;>=;0
 ;1;>=;0
