@@ -1,3 +1,0 @@
-/home/supersu/projects/manuelalferez/linear-programming-solver/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/supersu/projects/manuelalferez/linear-programming-solver/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/supersu/projects/manuelalferez/linear-programming-solver/cmake-build-debug/CMakeFiles/linear_programming_solver.dir
