@@ -9,10 +9,11 @@ using namespace std;
 
 class Problem {
 public:
-    Problem(vector<vector<float>> *matrix);
+    Problem(vector<vector<float>> *matrix, vector<vector<string>> *non_negativity_conditions);
 
 private:
     vector<vector<float>> *_matrix;
+    vector<vector<string>> *_non_negativity_conditions;
     vector<float> _solution;
 };
 

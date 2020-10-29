@@ -7,6 +7,6 @@ int main() {
     string dataPath = "../data/data.txt";
     std::cout << "Hello Linear Programming Solver!" << std::endl;
     Loader loader(dataPath);
-    Problem problem(loader.getMatrix());
+    Problem problem(loader.getMatrix(), loader.getNoNegativityConditions());
     return 0;
 }

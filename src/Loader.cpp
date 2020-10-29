@@ -109,3 +109,7 @@ int Loader::largestColumn() {
     }
     return max;
 }
+
+vector<vector<string>> *Loader::getNoNegativityConditions() {
+    return &this->_non_negativity_conditions;
+}
