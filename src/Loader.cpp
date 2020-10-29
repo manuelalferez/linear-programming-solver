@@ -23,6 +23,7 @@ Loader::Loader(string &pathFile) :
                 coefficient = stof(term);
                 this->_objective_function.push_back(coefficient);
             } while (!ss.eof());
+
             this->_structural_conditions.resize(getQuantityFunctions(fe));
             skip(fe, 1, '\n');
             int n_slack_variables = 0;
@@ -50,6 +51,7 @@ Loader::Loader(string &pathFile) :
                     _structural_condition.push_back(coefficient);
                 } while (!ss.eof());
             }
+
             this->_non_negativity_conditions.resize(getQuantityFunctions(fe));
             skip(fe, 1, '\n');
             for (auto &_non_negativity_condition : this->_non_negativity_conditions) {
@@ -80,4 +82,30 @@ int Loader::getQuantityFunctions(ifstream &fe) {
     getline(fe, line);
     string num_functions = line.substr(line.find(';') + 1);
     return stoi(num_functions);
+}
+
+vector<vector<float>> *Loader::getMatrix() {
+    int n_columns = largestColumn() + 1;
+    int n_rows = 1 + this->_structural_conditions.size();
+    vector<vector<float>> *matrix = new vector<vector<float>>(n_rows, vector<float>(n_columns, 0));
+    for (int i = 0; i < this->_objective_function.size(); ++i) {
+        matrix->at(0).at(i) = this->_objective_function[i];
+    }
+    for (int j = 0; j < this->_structural_conditions.size(); ++j) {
+        for (int i = 0; i < this->_structural_conditions.at(j).size() - 1; ++i) {
+            matrix->at(j + 1).at(i + 1) = this->_structural_conditions[j][i];
+        }
+        matrix->at(j + 1).at(n_columns - 1) = this->_structural_conditions[j].back();
+    }
+    return matrix;
+}
+
+int Loader::largestColumn() {
+    int max = 0;
+    for (auto &_structural_condition : this->_structural_conditions) {
+        cout << _structural_condition.size() << endl;
+        if (max < _structural_condition.size())
+            max = _structural_condition.size();
+    }
+    return max;
 }
