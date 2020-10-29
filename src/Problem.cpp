@@ -1,6 +1,6 @@
 #include <queue>
 #include "Problem.h"
 
-Problem::Problem(string &filePath) {
+Problem::Problem(vector<vector<float>> *matrix) : _matrix(matrix) {
 
 }

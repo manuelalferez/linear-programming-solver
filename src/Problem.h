@@ -9,11 +9,11 @@ using namespace std;
 
 class Problem {
 public:
-    Problem(string &filePath);
+    Problem(vector<vector<float>> *matrix);
 
 private:
-    vector<vector<float>> matrix;
-    vector<float> solution;
+    vector<vector<float>> *_matrix;
+    vector<float> _solution;
 };
 
 #endif //LINEAR_PROGRAMMING_SOLVER_PROBLEM_H
