@@ -11,6 +11,8 @@ class Solver {
 public:
     Solver(vector<vector<float>> *matrix, vector<vector<string>> *non_negativity_conditions);
 
+    vector<float> &calculateSolution();
+
 private:
     vector<vector<float>> *_matrix;
     vector<vector<string>> *_non_negativity_conditions;

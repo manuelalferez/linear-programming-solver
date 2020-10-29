@@ -5,3 +5,7 @@ Solver::Solver(vector<vector<float>> *matrix, vector<vector<string>> *non_negati
         _matrix(matrix),
         _non_negativity_conditions(non_negativity_conditions) {
 }
+
+vector<float> & Solver::calculateSolution() {
+
+}

@@ -24,6 +24,10 @@ Loader::Loader(string &pathFile) :
                 this->_objective_function.push_back(coefficient);
             } while (!ss.eof());
 
+            for (int i = 1; i < this->_objective_function.size(); ++i) {
+                this->_objective_function.at(i) = -this->_objective_function.at(i);
+            }
+
             this->_structural_conditions.resize(getQuantityFunctions(fe));
             skip(fe, 1, '\n');
             int n_slack_variables = 0;
