@@ -16,6 +16,7 @@ Solver::Solver(vector<vector<float>> *matrix, vector<vector<string>> *non_negati
 }
 
 vector<float> &Solver::calculateSolution() {
+    cout << "Executing Solver." << endl;
     while (!checkOptimality()) {
         int pivot_column = findPivotColumn();
         int pivot_row = findPivotRow(pivot_column);
@@ -96,12 +97,12 @@ void Solver::saveSolution() {
 }
 
 void Solver::printMatrix() {
-    cout << "------------------------" << endl;
     for (int i = 0; i < this->_matrix->size(); ++i) {
         for (int j = 0; j < this->_matrix->at(i).size(); ++j) {
             cout << this->_matrix->at(i).at(j) << " ";
         }
         cout << endl;
     }
+    cout << endl;
 }
 

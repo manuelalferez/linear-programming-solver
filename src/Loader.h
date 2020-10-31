@@ -19,7 +19,7 @@ public:
     vector<vector<float>> *getMatrix();
 
     vector<vector<string>> *getNoNegativityConditions();
-
+    vector<string>* getNamesOfUnknowns();
 private:
     int largestColumn();
 
@@ -31,6 +31,7 @@ private:
     vector<float> _objective_function;
     vector<vector<float>> _structural_conditions;
     vector<vector<string>> _non_negativity_conditions;
+    vector<string> _names_of_unknowns;
 };
 
 #endif //LINEAR_PROGRAMMING_SOLVER_LOADER_H

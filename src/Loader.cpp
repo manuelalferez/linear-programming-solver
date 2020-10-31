@@ -3,7 +3,8 @@
 Loader::Loader(string &pathFile) :
         _objective_function(),
         _non_negativity_conditions(),
-        _structural_conditions() {
+        _structural_conditions(),
+        _names_of_unknowns() {
     ifstream fe;
     string line;
 
@@ -11,13 +12,23 @@ Loader::Loader(string &pathFile) :
 
     if (fe.good()) {
         while (!fe.eof()) {
-            skip(fe, 2, '\n');
+            skip(fe, 1, '\n');
             getline(fe, line);
             stringstream ss;
             ss << line;
 
             string term;
             float coefficient;
+
+            do {
+                getline(ss, term, ';');
+                this->_names_of_unknowns.push_back(term);
+            } while (!ss.eof());
+
+            getline(fe, line);
+            ss.clear();
+            ss << line;
+
             do {
                 getline(ss, term, ';');
                 coefficient = stof(term);
@@ -107,7 +118,6 @@ vector<vector<float>> *Loader::getMatrix() {
 int Loader::largestColumn() {
     int max = 0;
     for (auto &_structural_condition : this->_structural_conditions) {
-        cout << _structural_condition.size() << endl;
         if (max < _structural_condition.size())
             max = _structural_condition.size();
     }
@@ -116,4 +126,8 @@ int Loader::largestColumn() {
 
 vector<vector<string>> *Loader::getNoNegativityConditions() {
     return &this->_non_negativity_conditions;
+}
+
+vector<string> *Loader::getNamesOfUnknowns() {
+    return &this->_names_of_unknowns;
 }
