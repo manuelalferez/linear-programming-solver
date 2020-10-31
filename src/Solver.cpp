@@ -8,26 +8,33 @@ Solver::Solver(vector<vector<float>> *matrix, vector<vector<string>> *non_negati
 
 vector<float> &Solver::calculateSolution() {
     while (!checkOptimality()) {
-        int pivotColumn = findPivotColumn();
-        int pivotRow = findPivotRow(pivotColumn);
-        doPivoting(pivotRow, pivotColumn);
+        int pivot_column = findPivotColumn();
+        int pivot_row = findPivotRow(pivot_column);
+        doPivoting(pivot_row, pivot_column);
     }
     saveSolution();
     return this->_solution;
 }
 
 bool Solver::checkOptimality() {
-    int positivesValues = 0;
+    int positive_values = 0;
     for (int i = 1; i < this->_matrix->at(0).size(); ++i) {
         if (this->_matrix->at(0).at(i) >= 0) {
-            positivesValues++;
+            positive_values++;
         }
     }
-    return this->_matrix->at(0).size() - 1 == positivesValues;
+    return this->_matrix->at(0).size() - 1 == positive_values;
 }
 
 int Solver::findPivotColumn() {
-    return 0;
+    int pivot_column = 0, min_value = INT_MAX;
+    for (int i = 1; i < this->_matrix->at(0).size(); ++i) {
+        if (this->_matrix->at(0).at(i) < min_value) {
+            pivot_column = i;
+            min_value = this->_matrix->at(0).at(i);
+        }
+    }
+    return pivot_column;
 }
 
 int Solver::findPivotRow(int pivotColumn) {
