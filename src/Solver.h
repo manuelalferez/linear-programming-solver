@@ -24,6 +24,7 @@ private:
     vector<vector<float>> *_matrix;
     vector<vector<string>> *_non_negativity_conditions;
     vector<float> _solution;
+    int _number_of_unknowns;
 };
 
 #endif //LINEAR_PROGRAMMING_SOLVER_SOLVER_H

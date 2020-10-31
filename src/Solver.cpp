@@ -4,6 +4,15 @@
 Solver::Solver(vector<vector<float>> *matrix, vector<vector<string>> *non_negativity_conditions) :
         _matrix(matrix),
         _non_negativity_conditions(non_negativity_conditions) {
+    _number_of_unknowns = 0;
+    for (int i = 0; i < this->_matrix->at(0).size(); ++i) {
+        if (this->_matrix->at(0).at(i) != 0) {
+            _number_of_unknowns++;
+        } else {
+            break;
+        }
+    }
+    _solution = vector<float>(_number_of_unknowns);
 }
 
 vector<float> &Solver::calculateSolution() {
@@ -60,20 +69,30 @@ void Solver::gaussianElimination(int pivot_row, int pivot_column) {
         } else {
             int scalar = -this->_matrix->at(row).at(pivot_column);
             for (int col = 0; col < this->_matrix->at(row).size(); ++col) {
-                this->_matrix->at(row).at(col) = scalar * this->_matrix->at(pivot_row).at(col) + this->_matrix->at(row).at(col);
+                this->_matrix->at(row).at(col) =
+                        scalar * this->_matrix->at(pivot_row).at(col) + this->_matrix->at(row).at(col);
             }
         }
     }
 }
 
 void Solver::transformPivotToUnity(int pivot_row, int pivot_column) {
-    int pivot_value = this->_matrix->at(pivot_row).at(pivot_column);
+    float pivot_value = this->_matrix->at(pivot_row).at(pivot_column);
     for (int col = 0; col < this->_matrix->at(0).size(); ++col) {
         this->_matrix->at(pivot_row).at(col) = this->_matrix->at(pivot_row).at(col) / pivot_value;
     }
 }
 
 void Solver::saveSolution() {
+    int index_b = this->_matrix->at(0).size();
+    for (int col = 0; col < _solution.size(); ++col) {
+        for (int row = 0; row < this->_matrix->size(); ++row) {
+            if (this->_matrix->at(row).at(col) == 1) {
+                _solution.at(col) = this->_matrix->at(row).at(index_b-1);
+            }
+        }
+    }
+
     cout << "Saving solution" << endl;
 }
 
