@@ -2,7 +2,6 @@
 
 Loader::Loader(string &pathFile) :
         _objective_function(),
-        _non_negativity_conditions(),
         _structural_conditions(),
         _names_of_unknowns() {
     ifstream fe;
@@ -66,18 +65,6 @@ Loader::Loader(string &pathFile) :
                     _structural_condition.push_back(coefficient);
                 } while (!ss.eof());
             }
-
-            this->_non_negativity_conditions.resize(getQuantityFunctions(fe));
-            skip(fe, 1, '\n');
-            for (auto &_non_negativity_condition : this->_non_negativity_conditions) {
-                getline(fe, line);
-                ss.clear();
-                ss << line;
-                do {
-                    getline(ss, term, ';');
-                    _non_negativity_condition.push_back(term);
-                } while (!ss.eof());
-            }
         }
         cout << "File charged successfully." << endl;
         fe.close();
@@ -122,10 +109,6 @@ int Loader::largestColumn() {
             max = _structural_condition.size();
     }
     return max;
-}
-
-vector<vector<string>> *Loader::getNoNegativityConditions() {
-    return &this->_non_negativity_conditions;
 }
 
 vector<string> *Loader::getNamesOfUnknowns() {

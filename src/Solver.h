@@ -10,7 +10,7 @@ using namespace std;
 
 class Solver {
 public:
-    Solver(vector<vector<float>> *matrix, vector<vector<string>> *non_negativity_conditions);
+    Solver(vector<vector<float>> *matrix);
 
     vector<float> &calculateSolution();
 private:
@@ -23,7 +23,6 @@ private:
     void printMatrix();
 private:
     vector<vector<float>> *_matrix;
-    vector<vector<string>> *_non_negativity_conditions;
     vector<float> _solution;
     int _number_of_unknowns;
 };

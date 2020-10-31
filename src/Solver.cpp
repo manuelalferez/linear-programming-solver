@@ -1,9 +1,8 @@
 #include <queue>
 #include "Solver.h"
 
-Solver::Solver(vector<vector<float>> *matrix, vector<vector<string>> *non_negativity_conditions) :
-        _matrix(matrix),
-        _non_negativity_conditions(non_negativity_conditions) {
+Solver::Solver(vector<vector<float>> *matrix) :
+        _matrix(matrix) {
     _number_of_unknowns = 0;
     for (int i = 0; i < this->_matrix->at(0).size(); ++i) {
         if (this->_matrix->at(0).at(i) != 0) {
@@ -17,9 +16,12 @@ Solver::Solver(vector<vector<float>> *matrix, vector<vector<string>> *non_negati
 
 vector<float> &Solver::calculateSolution() {
     cout << "Executing Solver." << endl;
+    cout << "Initial Matrix: " << endl;
+    printMatrix();
     while (!checkOptimality()) {
         int pivot_column = findPivotColumn();
         int pivot_row = findPivotRow(pivot_column);
+        cout << "Pivot: [" << pivot_row << " , " << pivot_column << "]" << endl;
         gaussianElimination(pivot_row, pivot_column);
         printMatrix();
     }
