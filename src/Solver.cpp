@@ -10,7 +10,7 @@ vector<float> &Solver::calculateSolution() {
     while (!checkOptimality()) {
         int pivot_column = findPivotColumn();
         int pivot_row = findPivotRow(pivot_column);
-        doPivoting(pivot_row, pivot_column);
+        gaussianElimination(pivot_row, pivot_column);
     }
     saveSolution();
     return this->_solution;
@@ -52,8 +52,25 @@ int Solver::findPivotRow(int pivot_column) {
     return pivot_row;
 }
 
-void Solver::doPivoting(int pivotRow, int pivotColumn) {
-    cout << "Doing pivoting" << endl;
+void Solver::gaussianElimination(int pivot_row, int pivot_column) {
+    transformPivotToUnity(pivot_row, pivot_column);
+    for (int row = 0; row < this->_matrix->size(); ++row) {
+        if (row == pivot_row) {
+            continue;
+        } else {
+            int scalar = -this->_matrix->at(row).at(pivot_column);
+            for (int col = 0; col < this->_matrix->at(row).size(); ++col) {
+                this->_matrix->at(row).at(col) = scalar * this->_matrix->at(pivot_row).at(col) + this->_matrix->at(row).at(col);
+            }
+        }
+    }
+}
+
+void Solver::transformPivotToUnity(int pivot_row, int pivot_column) {
+    int pivot_value = this->_matrix->at(pivot_row).at(pivot_column);
+    for (int col = 0; col < this->_matrix->at(0).size(); ++col) {
+        this->_matrix->at(pivot_row).at(col) = this->_matrix->at(pivot_row).at(col) / pivot_value;
+    }
 }
 
 void Solver::saveSolution() {

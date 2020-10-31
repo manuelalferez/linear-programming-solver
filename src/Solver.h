@@ -17,7 +17,8 @@ private:
     bool checkOptimality();
     int findPivotColumn();
     int findPivotRow(int pivot_column);
-    void doPivoting(int pivotRow, int pivotColumn);
+    void gaussianElimination(int pivot_row, int pivot_column);
+    void transformPivotToUnity(int pivot_row, int pivot_column);
     void saveSolution();
 private:
     vector<vector<float>> *_matrix;
