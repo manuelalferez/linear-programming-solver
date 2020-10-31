@@ -16,7 +16,7 @@ public:
 private:
     bool checkOptimality();
     int findPivotColumn();
-    int findPivotRow(int pivotColumn);
+    int findPivotRow(int pivot_column);
     void doPivoting(int pivotRow, int pivotColumn);
     void saveSolution();
 private:
