@@ -5,7 +5,3 @@ Number of Structural Conditions;2
 X1;X2;OPERATOR;b
 1;2;<=;120
 1;1;<=;90
-Number of Non-negativity Conditions;2
-X1;X2;OPERATOR;b
-1;;>=;0
-;1;>=;0

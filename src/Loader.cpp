@@ -2,8 +2,8 @@
 
 Loader::Loader(string &pathFile) :
         _objective_function(),
-        _non_negativity_conditions(),
-        _structural_conditions() {
+        _structural_conditions(),
+        _names_of_unknowns() {
     ifstream fe;
     string line;
 
@@ -11,18 +11,32 @@ Loader::Loader(string &pathFile) :
 
     if (fe.good()) {
         while (!fe.eof()) {
-            skip(fe, 2, '\n');
+            skip(fe, 1, '\n');
             getline(fe, line);
             stringstream ss;
             ss << line;
 
             string term;
             float coefficient;
+
+            do {
+                getline(ss, term, ';');
+                this->_names_of_unknowns.push_back(term);
+            } while (!ss.eof());
+
+            getline(fe, line);
+            ss.clear();
+            ss << line;
+
             do {
                 getline(ss, term, ';');
                 coefficient = stof(term);
                 this->_objective_function.push_back(coefficient);
             } while (!ss.eof());
+
+            for (int i = 1; i < this->_objective_function.size(); ++i) {
+                this->_objective_function.at(i) = -this->_objective_function.at(i);
+            }
 
             this->_structural_conditions.resize(getQuantityFunctions(fe));
             skip(fe, 1, '\n');
@@ -49,18 +63,6 @@ Loader::Loader(string &pathFile) :
                         coefficient = stof(term);
                     }
                     _structural_condition.push_back(coefficient);
-                } while (!ss.eof());
-            }
-
-            this->_non_negativity_conditions.resize(getQuantityFunctions(fe));
-            skip(fe, 1, '\n');
-            for (auto &_non_negativity_condition : this->_non_negativity_conditions) {
-                getline(fe, line);
-                ss.clear();
-                ss << line;
-                do {
-                    getline(ss, term, ';');
-                    _non_negativity_condition.push_back(term);
                 } while (!ss.eof());
             }
         }
@@ -103,13 +105,12 @@ vector<vector<float>> *Loader::getMatrix() {
 int Loader::largestColumn() {
     int max = 0;
     for (auto &_structural_condition : this->_structural_conditions) {
-        cout << _structural_condition.size() << endl;
         if (max < _structural_condition.size())
             max = _structural_condition.size();
     }
     return max;
 }
 
-vector<vector<string>> *Loader::getNoNegativityConditions() {
-    return &this->_non_negativity_conditions;
+vector<string> *Loader::getNamesOfUnknowns() {
+    return &this->_names_of_unknowns;
 }
