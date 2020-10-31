@@ -20,6 +20,7 @@ private:
     void gaussianElimination(int pivot_row, int pivot_column);
     void transformPivotToUnity(int pivot_row, int pivot_column);
     void saveSolution();
+    void printMatrix();
 private:
     vector<vector<float>> *_matrix;
     vector<vector<string>> *_non_negativity_conditions;

@@ -8,6 +8,10 @@ int main() {
     std::cout << "Hello Linear Programming Solver!" << std::endl;
     Loader loader(dataPath);
     Solver solver(loader.getMatrix(), loader.getNoNegativityConditions());
-    solver.calculateSolution();
+    vector<float> solution = solver.calculateSolution();
+    cout << "Solution: " << endl;
+    for (float sol : solution) {
+        cout << sol << " " << endl;
+    }
     return 0;
 }
