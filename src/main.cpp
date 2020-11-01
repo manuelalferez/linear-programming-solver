@@ -19,12 +19,15 @@ void writeSolutionToFile(string &pathFile, vector<float> *solution, vector<strin
 int main() {
     string dataPath = "../data/data.txt";
     string solutionPath = "../solution/solution.txt";
-    std::cout << "Hello Linear Programming Solver!" << std::endl;
+
     Loader loader(dataPath);
     vector<string> *names_of_unknowns = loader.getNamesOfUnknowns();
+
     Solver solver(loader.getMatrix());
     vector<float> solution = solver.calculateSolution();
+
     writeSolutionToFile(solutionPath, &solution, names_of_unknowns);
+
     cout << "Solution: " << endl;
     for (int i = 0; i < solution.size(); ++i) {
         cout << names_of_unknowns->at(i) << "= " << solution.at(i) << " " << endl;

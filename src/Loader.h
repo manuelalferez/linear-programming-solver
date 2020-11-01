@@ -18,7 +18,8 @@ public:
 
     vector<vector<float>> *getMatrix();
 
-    vector<string>* getNamesOfUnknowns();
+    vector<string> *getNamesOfUnknowns();
+
 private:
     int largestColumn();
 

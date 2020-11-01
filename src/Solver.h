@@ -13,14 +13,22 @@ public:
     Solver(vector<vector<float>> *matrix);
 
     vector<float> &calculateSolution();
+
 private:
     bool checkOptimality();
+
     int findPivotColumn();
+
     int findPivotRow(int pivot_column);
+
     void gaussianElimination(int pivot_row, int pivot_column);
+
     void transformPivotToUnity(int pivot_row, int pivot_column);
+
     void saveSolution();
+
     void printMatrix();
+
 private:
     vector<vector<float>> *_matrix;
     vector<float> _solution;
