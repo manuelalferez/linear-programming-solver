@@ -30,3 +30,10 @@ The program must be able to:
 * the constraints of the problem 
 
 Additional characteristics: Preloaded problems, via a configuration/data file.
+
+
+
+## Understanding the project 
+
+Take a look at our [Wiki](https://github.com/manuelalferez/linear-programming-solver/wiki/Documentation) to understand how the project is composed. 
+
